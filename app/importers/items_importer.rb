@@ -29,7 +29,7 @@ class ItemsImporter
       bar.increment
     end
     bar.finish
-    puts "#{number_of_lines - 1} items imported"
+    puts "#{number_of_lines} items imported"
   end
 
   private
