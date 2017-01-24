@@ -15,6 +15,8 @@ describe "Invoices importer" do
 
   context "successful import" do
     it "imports all the invoices and saves them to the database" do
+      create(:customer, id: 1)
+      create(:merchant, id: 22)
       expect{InvoicesImporter.new(good).import}
         .to change{Invoice.count}
         .by(8)
