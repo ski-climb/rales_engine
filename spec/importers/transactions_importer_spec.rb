@@ -6,6 +6,7 @@ describe 'Transactions Importer' do
 
   context 'unsuccessful import' do
     it 'raises an error' do
+
       expect{TransactionsImporter.new(bad).import}
         .to raise_error(ActiveRecord::RecordInvalid)
       
@@ -15,6 +16,8 @@ describe 'Transactions Importer' do
 
   context 'successful import' do
     it 'changes count' do
+      create(:invoice, id: 1)
+
       expect{TransactionsImporter.new(good).import}
         .to change{Transaction.count}.by 3
     end
