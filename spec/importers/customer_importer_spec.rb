@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe "Customer importer" do
+describe "Customers importer" do
   let(:bad) { './spec/fixtures/bad/customers.csv' }
   let(:good) { './spec/fixtures/good/customers.csv' }
 
   context "unsuccessful import" do
     it "raises an error" do
-      expect{CustomerImporter.new(bad).import}
+      expect{CustomersImporter.new(bad).import}
         .to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -17,7 +17,7 @@ describe "Customer importer" do
 
   context "successful import" do
     it "imports all the customers and saves them to the database" do
-      expect{CustomerImporter.new(good).import}
+      expect{CustomersImporter.new(good).import}
         .to change{Customer.count}
         .by(11)
     end
