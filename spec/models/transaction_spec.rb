@@ -13,11 +13,13 @@ describe Transaction do
   end
 
   describe "result" do
+
     it "success" do
       transaction = create(:transaction, result: 0)
       expect(transaction.success?).to be true
       expect(transaction.result).to eq "success"
     end
+
     it "failed" do
       transaction = create(:transaction, result: 1)
       expect(transaction.failed?).to be true
