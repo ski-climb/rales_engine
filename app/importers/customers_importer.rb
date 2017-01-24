@@ -28,6 +28,7 @@ class CustomersImporter
       bar.increment
     end
     bar.finish
+    puts "#{number_of_lines - 1} customers imported"
   end
 
   private

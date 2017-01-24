@@ -5,12 +5,10 @@ describe "Customers importer" do
   let(:good) { './spec/fixtures/good/customers.csv' }
 
   context "unsuccessful import" do
-    it "raises an error" do
+    it "raises an error and does not save any customers to the database" do
       expect{CustomersImporter.new(bad).import}
         .to raise_error(ActiveRecord::RecordInvalid)
-    end
 
-    it "does not create any new records to the database" do
       expect(Customer.count).to eq 0
     end
   end
