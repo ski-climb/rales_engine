@@ -16,7 +16,7 @@ class TransactionsImporter
 
       transaction_attributes = {
         id:                 row['id'].to_i,
-        credit_card_number: row['name'].to_i,
+        credit_card_number: row['credit_card_number'],
         invoice_id:         row['invoice_id'].to_i,
         result:             row['result'],
         updated_at:         to_date(row['updated_at']),
