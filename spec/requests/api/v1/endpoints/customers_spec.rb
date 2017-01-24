@@ -32,17 +32,18 @@ describe 'Customers API' do
     expect(customer['id']).to be_a Integer
   end
 
-  # it 'returns a random merchant' do
-  #   create_list(:merchant, 3)
+  it 'returns a random customer' do
+    create_list(:customer, 3)
 
-  #   get '/api/v1/merchants/random'
-  #   merchant = JSON.parse(response.body)
+    get '/api/v1/customers/random'
+    customer = JSON.parse(response.body)
 
-  #   expect(response).to be_success
+    expect(response).to be_success
 
-  #   expect(merchant).to be_a Hash
-  #   expect(merchant.keys.count).to eq 2
-  #   expect(merchant).to have_key 'id'
-  #   expect(merchant).to have_key 'name'
-  # end
+    expect(customer).to be_a Hash
+    expect(customer.keys.count).to eq 3
+    expect(customer).to have_key 'id'
+    expect(customer).to have_key 'first_name'
+    expect(customer).to have_key 'last_name'
+  end
 end
