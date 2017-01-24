@@ -77,72 +77,73 @@ describe 'Customers API' do
     end
   end
 
-  # context 'find_all' do
+  context 'find_all' do
 
-  #   let!(:customer_1) {create(:customer, first_name: 'Mike', created_at: date)}
-  #   let!(:customer_2) {create(:customer, first_name: 'Mike', created_at: date, updated_at: date)}
-  #   let!(:customer_3) {create(:customer, last_name: 'Targaryen', updated_at: date)}
-  #   let!(:customer_4) {create(:customer, last_name: 'Targaryen')}
+    let!(:customer_1) {create(:customer, first_name: 'Danaerys', created_at: date)}
+    let!(:customer_2) {create(:customer, created_at: date, updated_at: date)}
+    let!(:customer_3) {create(:customer, last_name: 'Targaryen', updated_at: date)}
+    let!(:customer_4) {create(:customer, last_name: 'Targaryen')}
     
-  #   it 'first_name' do
-  #     get '/api/v1/customers/find_all', params: {first_name: customer_1.first_name}
-  #     customers = JSON.parse(response.body)
+    it 'first_name' do
+      get '/api/v1/customers/find_all', params: {first_name: customer_1.first_name}
+      customers = JSON.parse(response.body)
 
-  #     expect(response).to be_success
-  #     expect(customers).to be_a Array
-  #     expect(customers.count).to eq 1
-  #     expect(customers.first['id']).to eq customer_1.id
-  #   end
+      expect(response).to be_success
+      expect(customers).to be_a Array
+      expect(customers.count).to eq 1
+      expect(customers.first['id']).to eq customer_1.id
+    end
 
-  #   it 'last_name' do
-  #     get '/api/v1/customers/find_all', params: {last_name: customer_1.last_name}
-  #     customers = JSON.parse(response.body)
+    it 'last_name' do
+      get '/api/v1/customers/find_all', params: {last_name: 'Targaryen'}
+      customers = JSON.parse(response.body)
 
-  #     expect(response).to be_success
-  #     expect(customers).to be_a Array
-  #     expect(customers.count).to eq 1
-  #     expect(customers.first['id']).to eq customer_1.id
-  #   end
+      expect(response).to be_success
+      expect(customers).to be_a Array
+      expect(customers.count).to eq 2
+      expect(customers.first['id']).to eq customer_3.id
+      expect(customers.last['id']).to eq customer_4.id
+    end
 
-  #   it 'updated_at' do
-  #     get '/api/v1/customers/find_all', params: {updated_at: date}
-  #     customers = JSON.parse(response.body)
+    it 'updated_at' do
+      get '/api/v1/customers/find_all', params: {updated_at: date}
+      customers = JSON.parse(response.body)
 
-  #     expect(response).to be_success
-  #     expect(customers).to be_a Array
-  #     expect(customers.count).to eq 2
-  #     expect(customers.first['id']).to eq customer_2.id
-  #     expect(customers.last['id']).to eq customer_3.id
-  #   end
+      expect(response).to be_success
+      expect(customers).to be_a Array
+      expect(customers.count).to eq 2
+      expect(customers.first['id']).to eq customer_2.id
+      expect(customers.last['id']).to eq customer_3.id
+    end
 
-  #   it 'created_at' do
-  #     get '/api/v1/customers/find_all', params: {created_at: date}
-  #     customers = JSON.parse(response.body)
+    it 'created_at' do
+      get '/api/v1/customers/find_all', params: {created_at: date}
+      customers = JSON.parse(response.body)
 
-  #     expect(response).to be_success
-  #     expect(customers).to be_a Array
-  #     expect(customers.count).to eq 2
-  #     expect(customers.first['id']).to eq customer_1.id
-  #     expect(customers.last['id']).to eq customer_2.id
-  #   end
+      expect(response).to be_success
+      expect(customers).to be_a Array
+      expect(customers.count).to eq 2
+      expect(customers.first['id']).to eq customer_1.id
+      expect(customers.last['id']).to eq customer_2.id
+    end
 
-  #   it 'id' do
-  #     get '/api/v1/customers/find_all', params: {id: customer_4.id}
-  #     customers = JSON.parse(response.body)
+    it 'id' do
+      get '/api/v1/customers/find_all', params: {id: customer_4.id}
+      customers = JSON.parse(response.body)
 
-  #     expect(response).to be_success
-  #     expect(customers).to be_a Array
-  #     expect(customers.count).to eq 1
-  #     expect(customers.first['id']).to eq customer_4.id
-  #   end
+      expect(response).to be_success
+      expect(customers).to be_a Array
+      expect(customers.count).to eq 1
+      expect(customers.first['id']).to eq customer_4.id
+    end
 
-  #   it 'multiple attributes' do
-  #     get '/api/v1/customers/find_all', params: {created_at: date, updated_at: date}
-  #     customers = JSON.parse(response.body)
+    it 'multiple attributes' do
+      get '/api/v1/customers/find_all', params: {created_at: date, updated_at: date}
+      customers = JSON.parse(response.body)
 
-  #     expect(response).to be_success
-  #     expect(customers).to be_a Array
-  #     expect(customers.count).to eq 1
-  #   end
-  # end
+      expect(response).to be_success
+      expect(customers).to be_a Array
+      expect(customers.count).to eq 1
+    end
+  end
 end
