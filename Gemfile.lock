@@ -45,10 +45,10 @@ GEM
     database_cleaner (1.5.3)
     diff-lcs (1.3)
     erubis (2.7.0)
-    factory_girl (4.7.0)
+    factory_girl (4.8.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.7.0)
-      factory_girl (~> 4.7.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
     faker (1.7.2)
       i18n (~> 0.5)
@@ -73,6 +73,7 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     pg (0.19.0)
+    progressbar (1.8.2)
     puma (3.6.2)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -148,6 +149,7 @@ DEPENDENCIES
   faker
   listen (~> 3.0.5)
   pg (~> 0.18)
+  progressbar
   puma (~> 3.0)
   rails (~> 5.0.1)
   rspec-rails
@@ -155,4 +157,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.13.7
+   1.14.2
