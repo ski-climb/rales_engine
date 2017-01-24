@@ -8,6 +8,6 @@ describe Merchant do
   end
 
   describe 'relationships' do
-    it { is_expected.to respond_to(:items) }
+    it { is_expected.to have_many(:items) }
   end
 end
