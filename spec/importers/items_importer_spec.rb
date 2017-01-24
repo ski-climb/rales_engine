@@ -15,6 +15,7 @@ describe 'Items Importer' do
 
   context 'successful import' do
     it 'changes count' do
+      create(:merchant, id: 1)
       expect{ItemsImporter.new(good).import}
         .to change{Item.count}.by 3
     end
