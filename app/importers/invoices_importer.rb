@@ -19,7 +19,6 @@ class InvoicesImporter
         id:          row['id'].to_i,
         customer_id: row['customer_id'].to_i,
         merchant_id: row['merchant_id'].to_i,
-        status:      row['status'],
         updated_at:  to_date(row['updated_at']),
         created_at:  to_date(row['created_at'])
       }
