@@ -1,7 +1,5 @@
 class Invoice < ApplicationRecord
-  validates :status, presence: true
-  validates :created_at, presence: true
-  validates :updated_at, presence: true
+  validates :status, :created_at, :updated_at, presence: true
   belongs_to :customer
   belongs_to :merchant
 
