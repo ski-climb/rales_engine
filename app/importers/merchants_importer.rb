@@ -15,6 +15,7 @@ class MerchantsImporter
     CSV.foreach(filename, headers: true) do |row|
 
       merchant_attributes = {
+        id:         row['id'].to_i,
         name:       row['name'],
         updated_at: to_date(row['updated_at']),
         created_at: to_date(row['created_at'])
