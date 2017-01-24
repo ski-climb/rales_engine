@@ -9,4 +9,8 @@ describe Item do
     it { is_expected.to validate_presence_of(:updated_at) }
     it { is_expected.to validate_presence_of(:created_at) }
   end
+
+  describe 'relationships' do
+    it { is_expected.to respond_to(:merchant) }
+  end
 end

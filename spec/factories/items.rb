@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :item do
-    name                { Faker::Pokemon.name }
+    name                { Faker::Commerce.product_name }
     description         { Faker::Hipster.sentence(3) }
     unit_price_in_cents { Faker::Number.between(1, 700000) }
     merchant
