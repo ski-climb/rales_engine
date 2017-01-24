@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170124154548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "customers", force: :cascade do |t|
     t.string   "first_name"
@@ -23,8 +24,8 @@ ActiveRecord::Schema.define(version: 20170124154548) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.text     "name"
-    t.text     "description"
+    t.citext   "name"
+    t.citext   "description"
     t.integer  "unit_price_in_cents"
     t.integer  "merchant_id"
     t.datetime "created_at",          null: false
