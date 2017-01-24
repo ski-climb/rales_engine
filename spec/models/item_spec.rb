@@ -13,4 +13,12 @@ describe Item do
   describe 'relationships' do
     it { is_expected.to belong_to(:merchant) }
   end
+
+  describe '#unit_price' do
+    it "returns the unit price in dollars" do
+      item = create(:item, unit_price_in_cents: 12_34)
+
+      expect(item.unit_price).to eq "12.34"
+    end
+  end
 end
