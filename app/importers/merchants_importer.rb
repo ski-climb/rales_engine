@@ -26,6 +26,7 @@ class MerchantsImporter
       bar.increment
     end
     bar.finish
+    puts "#{number_of_lines - 1} merchants imported"
   end
 
   private

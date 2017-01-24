@@ -1,12 +1,22 @@
 require 'rails_helper'
 
 describe 'Merchants Importer' do
-  it '#import' do
-    file = './spec/fixtures/merchants.csv'
+  let(:bad) { './spec/fixtures/bad/merchants.csv' }
+  let(:good) { './spec/fixtures/good/merchants.csv' }
 
-    expect {
-      MerchantsImporter.new(file).import
-    }.to change { Merchant.count }.by 3
+  context 'unsuccessful import' do
+    it 'raises an error' do
+      expect{MerchantsImporter.new(bad).import}
+        .to raise_error(ActiveRecord::RecordInvalid)
+      
+      expect(Merchant.count).to eq 0
+    end
+  end
+
+  context 'successful import' do
+    it 'changes count' do
+      expect{MerchantsImporter.new(good).import}
+        .to change{Merchant.count}.by 3
+    end
   end
 end
-
