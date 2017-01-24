@@ -11,6 +11,6 @@ describe Item do
   end
 
   describe 'relationships' do
-    it { is_expected.to respond_to(:merchant) }
+    it { is_expected.to belong_to(:merchant) }
   end
 end
