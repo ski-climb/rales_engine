@@ -37,6 +37,12 @@ describe InvoiceItem do
 
         expect(Invoice.on_date(nil)).to eq invoices
       end
+
+  describe '#unit_price' do
+    it "returns the unit price in dollars" do
+      invoice_item = create(:invoice_item, unit_price_in_cents: 12_34)
+
+      expect(invoice_item.unit_price).to eq "12.34"
     end
   end
 end
