@@ -4,5 +4,13 @@ class Merchant < ApplicationRecord
 
   has_many :invoices
   has_many :transactions, through: :invoices
+  has_many :invoice_items, through: :invoices
   has_many :items
+
+  def revenue(date)
+    invoices
+      .joins(:transactions, :invoice_items)
+      .merge(Transaction.successful)
+      .sum('unit_price_in_cents * quantity')
+  end
 end

@@ -11,5 +11,6 @@ describe Merchant do
     it { is_expected.to have_many(:invoices) }
     it { is_expected.to have_many(:items) }
     it { is_expected.to have_many(:transactions) }
+    it { is_expected.to have_many(:invoice_items) }
   end
 end
