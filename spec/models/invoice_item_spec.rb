@@ -37,6 +37,8 @@ describe InvoiceItem do
 
         expect(Invoice.on_date(nil)).to eq invoices
       end
+    end
+  end
 
   describe '#unit_price' do
     it "returns the unit price in dollars" do
