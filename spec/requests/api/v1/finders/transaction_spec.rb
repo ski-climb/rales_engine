@@ -71,62 +71,88 @@ describe 'Transactions API' do
     end
   end
 
-#   context 'find_all' do
+  context 'find_all' do
 
-#     let!(:merchant_1) {create(:merchant, created_at: date)}
-#     let!(:merchant_2) {create(:merchant, created_at: date, updated_at: date)}
-#     let!(:merchant_3) {create(:merchant, updated_at: date)}
-#     let!(:merchant_4) {create(:merchant)}
+    let!(:transaction_1) {create(:transaction, created_at: date, id: 1)}
+    let!(:transaction_2) {create(:transaction, created_at: date, updated_at: date)}
+    let!(:transaction_3) {create(:transaction, updated_at: date)}
+    let!(:transaction_4) {create(:transaction, result: 'failed', credit_card_number: 2)}
+    let!(:transaction_5) {create(:transaction, result: 'failed', credit_card_number: 2)}
     
-#     it 'name' do
-#       get '/api/v1/merchants/find_all', params: {name: merchant_1.name}
-#       merchants = JSON.parse(response.body)
+    it 'id' do
+      get '/api/v1/transactions/find_all', params: {id: 1}
+      transactions = JSON.parse(response.body)
 
-#       expect(response).to be_success
-#       expect(merchants).to be_a Array
-#       expect(merchants.count).to eq 1
-#       expect(merchants.first['id']).to eq merchant_1.id
-#     end
+      expect(response).to be_success
+      expect(transactions).to be_a Array
+      expect(transactions.count).to eq 1
+      expect(transactions.first['id']).to eq transaction_1.id
+    end
 
-#     it 'updated_at' do
-#       get '/api/v1/merchants/find_all', params: {updated_at: date}
-#       merchants = JSON.parse(response.body)
+    it 'result' do
+      get '/api/v1/transactions/find_all', params: {result: 'failed'}
+      transactions = JSON.parse(response.body)
 
-#       expect(response).to be_success
-#       expect(merchants).to be_a Array
-#       expect(merchants.count).to eq 2
-#       expect(merchants.first['id']).to eq merchant_2.id
-#       expect(merchants.last['id']).to eq merchant_3.id
-#     end
+      expect(response).to be_success
+      expect(transactions).to be_a Array
+      expect(transactions.count).to eq 2
+      expect(transactions.first['id']).to eq transaction_4.id
+      expect(transactions.last['id']).to eq transaction_5.id
+    end
 
-#     it 'created_at' do
-#       get '/api/v1/merchants/find_all', params: {created_at: date}
-#       merchants = JSON.parse(response.body)
+    it 'created at' do
+      get '/api/v1/transactions/find_all', params: {created_at: date}
+      transactions = JSON.parse(response.body)
 
-#       expect(response).to be_success
-#       expect(merchants).to be_a Array
-#       expect(merchants.count).to eq 2
-#       expect(merchants.first['id']).to eq merchant_1.id
-#       expect(merchants.last['id']).to eq merchant_2.id
-#     end
+      expect(response).to be_success
+      expect(transactions).to be_a Array
+      expect(transactions.count).to eq 2
+      expect(transactions.first['id']).to eq transaction_1.id
+      expect(transactions.last['id']).to eq transaction_2.id
+    end
 
-#     it 'id' do
-#       get '/api/v1/merchants/find_all', params: {id: merchant_4.id}
-#       merchants = JSON.parse(response.body)
+    it 'updated at' do
+      get '/api/v1/transactions/find_all', params: {updated_at: date}
+      transactions = JSON.parse(response.body)
 
-#       expect(response).to be_success
-#       expect(merchants).to be_a Array
-#       expect(merchants.count).to eq 1
-#       expect(merchants.first['id']).to eq merchant_4.id
-#     end
+      expect(response).to be_success
+      expect(transactions).to be_a Array
+      expect(transactions.count).to eq 2
+      expect(transactions.first['id']).to eq transaction_2.id
+      expect(transactions.last['id']).to eq transaction_3.id
+    end
 
-#     it 'multiple attributes' do
-#       get '/api/v1/merchants/find_all', params: {created_at: date, updated_at: date}
-#       merchants = JSON.parse(response.body)
+    it 'credit card number' do
+      get '/api/v1/transactions/find_all', params: {credit_card_number: 2}
+      transactions = JSON.parse(response.body)
 
-#       expect(response).to be_success
-#       expect(merchants).to be_a Array
-#       expect(merchants.count).to eq 1
-#     end
-#   end
+      expect(response).to be_success
+      expect(transactions).to be_a Array
+      expect(transactions.count).to eq 2
+      expect(transactions.first['id']).to eq transaction_4.id
+      expect(transactions.last['id']).to eq transaction_5.id
+    end
+
+    it 'invoice id' do
+      get '/api/v1/transactions/find_all', params: {invoice_id: transaction_1.invoice_id}
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions).to be_a Array
+      expect(transactions.count).to eq 1
+      expect(transactions.first['id']).to eq transaction_1.id
+    end
+
+    it 'multiple attributes' do
+      get '/api/v1/transactions/find_all',
+        params: {created_at: date, updated_at: date}
+      
+      transactions = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(transactions).to be_a Array
+      expect(transactions.count).to eq 1
+      expect(transactions.first['id']).to eq transaction_2.id
+    end
+  end
 end
