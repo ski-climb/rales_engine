@@ -23,8 +23,8 @@ describe 'Customer API relationships' do
     customer = create(:customer)
     invoice_1 = create(:invoice, customer: customer)
     invoice_2 = create(:invoice, customer: customer)
-    transaction_1, transaction_2 = create_list(:transaction, 2, invoice: invoice_1)
-    transaction_1, transaction_2 = create_list(:transaction, 2, invoice: invoice_2)
+    create_list(:transaction, 2, invoice: invoice_1)
+    create_list(:transaction, 2, invoice: invoice_2)
 
     get "/api/v1/customers/#{customer.id}/transactions"
     transactions = JSON.parse(response.body)
