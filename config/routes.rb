@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
       resources :items, only: [:index, :show]
 
-      resources :transactions, only: [:index]
+      resources :transactions, only: [:index, :show]
 
       namespace :customers do
         get "/find", to: "find#show"

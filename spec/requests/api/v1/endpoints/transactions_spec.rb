@@ -13,21 +13,27 @@ describe 'Transactions API' do
     expect(transaction['result']).to eq 'success'
   end
 
-  # it 'returns a single merchant' do
-  #   create(:merchant, id: 5)
+  it 'returns a single transaction' do
+    create(:transaction, id: 5)
 
-  #   get '/api/v1/merchants/5'
-  #   merchant = JSON.parse(response.body)
+    get '/api/v1/transactions/5'
+    transaction = JSON.parse(response.body)
 
-  #   expect(response).to be_success
+    expect(response).to be_success
 
-  #   expect(merchant).to be_a Hash
-  #   expect(merchant.keys.count).to eq 2
-  #   expect(merchant).to have_key 'id'
-  #   expect(merchant).to have_key 'name'
-  #   expect(merchant['name']).to be_a String
-  #   expect(merchant['id']).to be_a Integer
-  # end
+    expect(transaction).to be_a Hash
+    expect(transaction.keys.count).to eq 4
+    
+    expect(transaction).to have_key 'id'
+    expect(transaction).to have_key 'credit_card_number'
+    expect(transaction).to have_key 'result'
+    expect(transaction).to have_key 'invoice_id'
+
+    expect(transaction['credit_card_number']).to be_a String
+    expect(transaction['id']).to be_a Integer
+    expect(transaction['result']).to be_a String
+    expect(transaction['invoice_id']).to be_a Integer
+  end
 
   # it 'returns a random merchant' do
   #   create_list(:merchant, 3)
