@@ -6,7 +6,11 @@ Rails.application.routes.draw do
         get "/find_all", to: "find#index"
         get "/random", to: "random#show"
       end
-      resources :merchants, only: [:index, :show]
+      resources :merchants, only: [:index, :show] do
+        scope module: :merchants do
+          resources :invoices, only: [:index]
+        end
+      end
 
       namespace :items do
         get "/find",     to: "find#show"
