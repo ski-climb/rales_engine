@@ -23,7 +23,7 @@ class API::V1::Items::FindController < ApplicationController
     end
 
     def set_unit_price
-      (params[:unit_price].to_f * 100).to_i
+      (params[:unit_price].to_f * 100).round
     end
 
     def search_params

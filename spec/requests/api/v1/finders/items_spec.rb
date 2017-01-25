@@ -6,7 +6,7 @@ describe 'Items API' do
 
   context 'find by' do
     let!(:item_1) { create(:item) }
-    let!(:item_2) { create(:item) }
+    let!(:item_2) { create(:item, unit_price_in_cents: 27409) }
     let!(:item_3) { create(:item) }
 
     it 'id' do
