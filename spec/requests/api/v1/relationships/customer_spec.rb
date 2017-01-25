@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Customer API relationships' do
 
-  it 'invoice' do
+  it 'invoices' do
     customer = create(:customer)
     invoices = create_list(:invoice, 5, customer: customer)
     invoice = invoices.first
