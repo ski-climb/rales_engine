@@ -18,4 +18,20 @@ require 'rails_helper'
       expect(response_invoice['merchant_id']).to eq invoice.merchant_id
       expect(response_invoice['customer_id']).to eq invoice.customer_id
     end
+    
+    it 'items' do
+      merchant = create(:merchant)
+      items = create_list(:item, 5, merchant: merchant)
+      item = items.first
+   
+      get "/api/v1/merchants/#{merchant.id}/items"
+      response_items = JSON.parse(response.body)
+      response_item = response_items.first
+    
+      expect(response).to be_success
+      expect(response_items).to be_a Array
+      expect(response_items.count).to eq 5
+      expect(response_item['id']).to eq item.id
+      expect(response_item['name']).to eq item.name
+    end
   end
