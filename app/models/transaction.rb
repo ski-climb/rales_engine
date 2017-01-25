@@ -6,12 +6,4 @@ class Transaction < ApplicationRecord
   enum result: %w(success failed)
 
   scope :successful, -> { where(result: 'success') }
-
-  def self.on_date(date)
-    if date
-      where(transactions: {created_at: date})
-    else
-      all
-    end
-  end
 end

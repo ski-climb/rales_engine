@@ -25,26 +25,27 @@ describe 'Merchant API revenue' do
   end
 
   it 'for one merchant by date' do
-    date_1 = '2012-03-16 11:55:05'
+    day_1 = '2012-03-16 11:55:05'
+
+    date_1 = '2012-03-16 4:55:05'
     date_2 = '2012-03-07 10:54:55'
 
     merchant = create(:merchant)
 
-    invoice_on_date_1 = create(:invoice, merchant: merchant)
-    invoice_on_date_2 = create(:invoice, merchant: merchant)
+    invoice_on_date_1 = create(:invoice, merchant: merchant, created_at: date_1)
+    invoice_on_date_2 = create(:invoice, merchant: merchant, created_at: date_2)
 
-    transaction_on_date_1 = create(:transaction, invoice: invoice_on_date_1, created_at: date_1)
-    transaction_on_date_2 = create(:transaction, invoice: invoice_on_date_2, created_at: date_2)
+    transaction_on_date_1 = create(:transaction, invoice: invoice_on_date_1)
+    transaction_on_date_2 = create(:transaction, invoice: invoice_on_date_2)
 
     invoice_items_on_date_1 = create_list(:invoice_item, 5, invoice: invoice_on_date_1)
     invoice_items_on_date_2 = create_list(:invoice_item, 5, invoice: invoice_on_date_2)
-
 
     expected_revenue = invoice_items_on_date_1.reduce(0) do |sum, invoice_item|
       sum += invoice_item.unit_price_in_cents * invoice_item.quantity
     end
 
-    get "/api/v1/merchants/#{merchant.id}/revenue/?date=#{date_1}"
+    get "/api/v1/merchants/#{merchant.id}/revenue/?date=#{day_1}"
     revenue = JSON.parse(response.body)
 
     expect(response).to be_success

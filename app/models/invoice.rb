@@ -7,4 +7,13 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   enum status: %w(shipped)
+
+  def self.on_date(date)
+    if date
+      day = Date.parse(date)
+      where(invoices: {created_at: day.beginning_of_day..day.end_of_day})
+    else
+      all
+    end
+  end
 end
