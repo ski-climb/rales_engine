@@ -9,7 +9,7 @@ class Transaction < ApplicationRecord
 
   def self.on_date(date)
     if date
-      where(transactions: {created_at: date}) if date
+      where(transactions: {created_at: date})
     else
       all
     end
