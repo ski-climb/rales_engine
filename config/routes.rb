@@ -28,6 +28,11 @@ Rails.application.routes.draw do
         get "/random", to: "random#show"
       end
       resources :transactions, only: [:show, :index]
+
+      namespace :invoice_items do
+        get "/random", to: "random#show"
+      end
+      resources :invoice_items, only: [:index, :show]
     end
   end
 end
