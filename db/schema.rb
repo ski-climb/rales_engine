@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124191927) do
+ActiveRecord::Schema.define(version: 20170124231827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "citext"
 
   create_table "customers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.citext   "first_name"
+    t.citext   "last_name"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -49,7 +49,18 @@ ActiveRecord::Schema.define(version: 20170124191927) do
     t.citext   "name"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "invoice_id"
+    t.text     "credit_card_number"
+    t.integer  "result"
+    t.datetime "credit_card_expiration_date"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["invoice_id"], name: "index_transactions_on_invoice_id", using: :btree
+  end
+
   add_foreign_key "invoices", "customers"
   add_foreign_key "invoices", "merchants"
   add_foreign_key "items", "merchants"
+  add_foreign_key "transactions", "invoices"
 end
