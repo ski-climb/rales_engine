@@ -26,4 +26,13 @@ describe Transaction do
       expect(transaction.result).to eq "failed"
     end
   end
+
+  describe ".successful" do
+    it 'returns successful transactions' do
+      successful_transactions = create_list(:transaction, 3, result: 'success')
+      failed_transactions = create_list(:transaction, 3, result: 'failed')
+
+      expect(Transaction.successful).to eq successful_transactions
+    end
+  end
 end
