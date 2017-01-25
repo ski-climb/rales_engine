@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show] do
         scope module: :merchants do
           resources :invoices, only: [:index]
+          resources :items, only: [:index]
         end
       end
 
