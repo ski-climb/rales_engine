@@ -28,6 +28,7 @@ describe Item do
     it 'responds to most_items' do
       expect(Item).to respond_to(:most_items)
     end
+  end
   
   describe '.best_day' do
     it { is_expected.to respond_to(:best_day) }

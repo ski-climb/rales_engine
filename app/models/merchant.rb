@@ -21,12 +21,13 @@ class Merchant < ApplicationRecord
       .group('merchants.id')
       .order('sum(invoice_items.quantity) DESC')
       .take(quantity)
+  end
 
   def self.revenue_by_day(date)
     joins(:invoice_items)
     .merge(Invoice.on_date(date))
     .merge(InvoiceItem.successful)
     .sum('unit_price_in_cents * quantity')
-
   end
+
 end
