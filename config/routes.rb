@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         get "/random", to: "random#show"
         get "/most_items", to: "most_items#index"
         get "/revenue", to: "revenue_by_second#show"
+        get "/most_revenue", to: "most_revenue#index"
       end
       resources :merchants, only: [:index, :show] do
         scope module: :merchants do
