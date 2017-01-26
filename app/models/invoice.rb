@@ -11,9 +11,16 @@ class Invoice < ApplicationRecord
   def self.on_date(date)
     if date
       day = Date.parse(date)
-      where(invoices: {created_at: day.beginning_of_day..day.end_of_day})
+      where(invoices: {created_at: date})
     else
       all
     end
+  end
+
+  def self.revenue_by_day(day)
+      joins(:transactions, :invoice_items)
+      .merge(Transaction.successful)
+      .merge(self.on_date(day))
+      .sum('unit_price_in_cents * quantity')
   end
 end

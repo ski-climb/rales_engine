@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         get "/find", to: "find#show"
         get "/find_all", to: "find#index"
         get "/random", to: "random#show"
+        get "/revenue", to: "revenue_by_second#show"
       end
       resources :merchants, only: [:index, :show] do
         scope module: :merchants do
@@ -20,7 +21,11 @@ Rails.application.routes.draw do
         get "/random",   to: "random#show"
         get "/most_items", to: "most_items#show"
       end
-      resources :items, only: [:index, :show]
+      resources :items, only: [:index, :show] do
+        scope module: :items do
+          get "/best_day", to: "best_day#show"
+        end
+      end
 
       namespace :customers do
         get "/find", to: "find#show"
@@ -31,6 +36,7 @@ Rails.application.routes.draw do
         scope module: :customers do
           resources :invoices, only: [:index]
           resources :transactions, only: [:index]
+          get "/favorite_merchant", to: "favorite_merchant#show"
         end
       end
 
