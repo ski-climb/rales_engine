@@ -7,8 +7,7 @@ class Customer < ApplicationRecord
 
   def favorite_merchant
     merchants
-      .joins(:invoices)
-      .joins(:transactions)
+      .joins(:invoices, :transactions)
       .merge(Transaction.successful)
       .group('merchants.id')
       .order('count(merchants.id) DESC')
