@@ -11,6 +11,6 @@ class Item < ApplicationRecord
   end
 
   def best_day
-    '2012-03-22T03:55:09.000Z'
+    
   end
 end
