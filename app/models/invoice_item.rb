@@ -8,6 +8,7 @@ class InvoiceItem < ApplicationRecord
             presence: true
   belongs_to :item
   belongs_to :invoice
+  has_many :transactions, through: :invoice
 
   def unit_price
     (unit_price_in_cents / 100.to_f).to_s
