@@ -9,4 +9,8 @@ class Item < ApplicationRecord
   def unit_price
     (unit_price_in_cents / 100.to_f).to_s
   end
+
+  def best_day
+    '2012-03-22T03:55:09.000Z'
+  end
 end

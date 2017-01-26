@@ -19,7 +19,11 @@ Rails.application.routes.draw do
         get "/find_all", to: "find#index"
         get "/random",   to: "random#show"
       end
-      resources :items, only: [:index, :show]
+      resources :items, only: [:index, :show] do
+        scope module: :items do
+          get "/best_day", to: "best_day#show"
+        end
+      end
 
       namespace :customers do
         get "/find", to: "find#show"
