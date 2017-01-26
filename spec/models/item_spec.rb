@@ -17,6 +17,12 @@ describe Item do
 
   end
 
+  describe '.most_revenue' do
+    it 'responds to most_revenue' do
+      expect(Item).to respond_to(:most_revenue)
+    end
+  end
+
   describe '#unit_price' do
     it "returns the unit price in dollars" do
       item = create(:item, unit_price_in_cents: 12_34)

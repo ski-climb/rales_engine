@@ -10,6 +10,8 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
   has_many :transactions, through: :invoice
 
+  scope :successful, -> { joins(:transactions).merge(Transaction.successful) }
+
   def unit_price
     (unit_price_in_cents / 100.to_f).to_s
   end
