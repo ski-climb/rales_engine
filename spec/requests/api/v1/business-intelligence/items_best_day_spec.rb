@@ -10,12 +10,12 @@ describe 'Items API' do
     invoice_on_best_day = create(:invoice, created_at: best_day)
     invoice_on_other_day = create(:invoice, created_at: other_day)
 
-    10.times do |n|
+    10.times do
       create(:invoice_item, item: item, invoice: invoice_on_best_day, quantity: 2)
     end
 
-    4.times do |n|
-      create(:invoice_item, item: item, invoice: invoice_on_other_day, quantity: 4)
+    12.times do
+      create(:invoice_item, item: item, invoice: invoice_on_other_day, quantity: 1)
     end
 
     get "/api/v1/items/#{item.id}/best_day"
@@ -40,7 +40,7 @@ describe 'Items API' do
     get "/api/v1/items/#{item.id}/best_day"
     response_day = JSON.parse(response.body)
 
-    expect(response_day['best_day']).to eq first_day
+    expect(response_day['best_day']).to eq second_day
     end
   end
 end
