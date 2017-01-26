@@ -20,4 +20,15 @@ describe Merchant do
     end
   end
 
+  describe '.most_items' do
+    it 'responds to most_items' do
+      expect(Merchant).to respond_to(:most_items)
+    end
+  end
+
+  describe ".revenue_by_day" do
+    it "responds to revenue_by_day"do
+      expect(Merchant).to respond_to(:revenue_by_day)
+    end
+  end
 end

@@ -9,8 +9,8 @@ class Merchant < ApplicationRecord
 
   def revenue(date)
     invoices.on_date(date)
-      .joins(:transactions, :invoice_items)
-      .merge(Transaction.successful)
+      .joins(:invoice_items)
+      .merge(InvoiceItem.successful)
       .sum('unit_price_in_cents * quantity')
   end
 
@@ -20,5 +20,20 @@ class Merchant < ApplicationRecord
       .group("merchants.id")
       .order("sum(quantity * unit_price_in_cents) DESC")
       .take(number_of_merchants.to_i)
+  end
+
+  def self.most_items(quantity)
+    joins(:invoice_items)
+      .merge(InvoiceItem.successful)
+      .group('merchants.id')
+      .order('sum(invoice_items.quantity) DESC')
+      .take(quantity)
+  end
+
+  def self.revenue_by_day(date)
+    joins(:invoice_items)
+    .merge(Invoice.on_date(date))
+    .merge(InvoiceItem.successful)
+    .sum('unit_price_in_cents * quantity')
   end
 end

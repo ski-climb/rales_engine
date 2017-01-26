@@ -24,9 +24,26 @@ describe Invoice do
     end
   end
 
-  describe ".revenue_by_day" do
-    it "responds to revenue_by_day"do
-      expect(Invoice).to respond_to(:revenue_by_day)
+  describe ".on_date" do
+    context "given date" do
+      it "returns only invoices on date" do
+        date = '2012-03-27 14:53:59 UTC'
+
+        create_list(:invoice, 3, created_at: date)
+        create_list(:invoice, 2)
+
+        expect(Invoice.count).to eq 5
+        expect(Invoice.on_date(date).count).to eq 3
+      end
+    end
+
+    context "no date given" do
+      it "returns all invoices" do
+        date = nil
+        create_list(:invoice, 3)
+
+        expect(Invoice.on_date(date)).to eq Invoice.all
+      end
     end
   end
 end
