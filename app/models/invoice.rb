@@ -16,11 +16,5 @@ class Invoice < ApplicationRecord
       all
     end
   end
-
-  def self.revenue_by_day(day)
-      joins(:transactions, :invoice_items)
-      .merge(Transaction.successful)
-      .merge(self.on_date(day))
-      .sum('unit_price_in_cents * quantity')
-  end
 end
+
