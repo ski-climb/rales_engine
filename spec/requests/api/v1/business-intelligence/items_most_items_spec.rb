@@ -10,9 +10,9 @@ describe 'Items API most items' do
       invoice = create(:invoice)
       transaction = create(:transaction, invoice: invoice)
 
-      create_list(:invoice_item, 3, item: first_item, quantity: 2, unit_price_in_cents: 500, invoice: invoice)
-      create(:invoice_item, item: second_item, quantity: 5, unit_price_in_cents: 100, invoice: invoice)
-      create_list(:invoice_item, 4, item: third_item, quantity: 1, unit_price_in_cents: 100, invoice: invoice)
+      create_list(:invoice_item, 3, item: first_item, quantity: 2, invoice: invoice)
+      create(:invoice_item, item: second_item, quantity: 5, invoice: invoice)
+      create_list(:invoice_item, 4, item: third_item, quantity: 1, invoice: invoice)
 
       get "/api/v1/items/most_items?quantity=2"
       items = JSON.parse(response.body)
@@ -33,7 +33,7 @@ describe 'Items API most items' do
 
       invoice = create(:invoice)
       transaction = create(:transaction, invoice: invoice, result: 'failed')
-
+      
       create_list(:invoice_item, 3, item: first_item, invoice: invoice)
 
       get "/api/v1/items/most_items?quantity=2"
