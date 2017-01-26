@@ -9,4 +9,12 @@ class Item < ApplicationRecord
   def unit_price
     (unit_price_in_cents / 100.to_f).to_s
   end
+
+  def self.most_items(quantity)
+    joins(:invoice_items)
+      .group('items.id')
+      .order('count(invoice_items.quantity * invoice_items.unit_price_in_cents) DESC')
+      .take(quantity.to_i)
+  end
 end
+
