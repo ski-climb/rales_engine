@@ -14,8 +14,8 @@ class Item < ApplicationRecord
     invoices
       .joins(:invoice_items)
       .group('invoices.id, invoices.created_at')
-      .order('count(invoice_items.quantity)')
-      .last
+      .order('count(invoice_items.quantity) DESC, invoices.created_at')
+      .first
       .created_at
   end
 end
