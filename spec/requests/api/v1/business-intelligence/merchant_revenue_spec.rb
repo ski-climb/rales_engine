@@ -73,7 +73,7 @@ describe 'Merchant API revenue' do
       get "/api/v1/merchants/revenue?date=#{sliver_of_time}"
 
       expect(response).to be_success
-      expect(Invoice.revenue_by_day(sliver_of_time)).to eq expected_revenue
+      expect(Merchant.revenue_by_day(sliver_of_time)).to eq expected_revenue
     end
   end
 end
