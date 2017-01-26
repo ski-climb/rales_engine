@@ -16,10 +16,9 @@ class Merchant < ApplicationRecord
   end
 
   def self.most_items(quantity)
-    Merchant
-    .joins(:invoice_items)
-    .group('merchants.id')
-    .order('sum(invoice_items.quantity) DESC')
-    .take(quantity)
+    joins(:invoice_items)
+      .group('merchants.id')
+      .order('sum(invoice_items.quantity) DESC')
+      .take(quantity)
   end
 end
