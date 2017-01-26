@@ -13,10 +13,10 @@ describe InvoiceItem do
   describe "relationships" do
     it { is_expected.to belong_to(:invoice) }
     it { is_expected.to belong_to(:item) }
+    it { is_expected.to have_many(:transactions) }
   end
 
   describe ".to_date" do
-
     context 'given a date' do
       it 'returns invoices on the date' do
         date_1 = '2012-03-16 11:55:05'
@@ -36,6 +36,40 @@ describe InvoiceItem do
         invoices = create_list(:invoice, 5)
 
         expect(Invoice.on_date(nil)).to eq invoices
+      end
+    end
+  end
+
+  describe ".successful" do
+    context 'unsuccessful transction' do
+      it 'returns an empty relation' do
+        unsuccessful_transaction = create(:transaction, result: "failed")
+        invoice_item = create(:invoice_item, invoice: unsuccessful_transaction.invoice)
+
+        expect(InvoiceItem.count).to eq 1
+        expect(InvoiceItem.successful.count).to eq 0
+      end
+    end
+
+    context 'successful transaction' do
+      it 'returns a successful invoice item in an ActiveRecord relation' do
+        successful_transaction = create(:transaction, result: "success")
+        invoice_item = create(:invoice_item, invoice: successful_transaction.invoice)
+
+        expect(InvoiceItem.count).to eq 1
+        expect(InvoiceItem.successful.count).to eq 1
+      end
+    end
+
+    context 'successful and unsuccessful transactions' do
+      it 'returns a successful invoice item in an ActiveRecord relation' do
+        invoice = create(:invoice)
+        unsuccessful_transaction = create(:transaction, invoice: invoice, result: "failed")
+        successful_transaction = create(:transaction, invoice: invoice, result: "success")
+        invoice_item = create(:invoice_item, invoice: invoice)
+
+        expect(InvoiceItem.count).to eq 1
+        expect(InvoiceItem.successful.count).to eq 1
       end
     end
   end
