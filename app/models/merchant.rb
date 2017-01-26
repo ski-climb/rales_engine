@@ -14,4 +14,12 @@ class Merchant < ApplicationRecord
       .merge(Invoice.on_date(date))
       .sum('unit_price_in_cents * quantity')
   end
+
+  def self.most_items(quantity)
+    Merchant
+    .joins(:invoice_items)
+    .group('merchants.id')
+    .order('sum(invoice_items.quantity) DESC')
+    .take(quantity)
+  end
 end
