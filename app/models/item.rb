@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   def self.most_items(quantity)
     joins(:invoice_items)
       .group('items.id')
-      .order('count(invoice_items.quantity * invoice_items.unit_price_in_cents) DESC')
+      .order('sum(invoice_items.quantity * invoice_items.unit_price_in_cents) DESC')
       .take(quantity.to_i)
   end
 end
