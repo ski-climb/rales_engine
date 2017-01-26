@@ -23,4 +23,10 @@ describe Invoice do
       expect(invoice.status).to eq "shipped"
     end
   end
+
+  describe ".revenue_by_day" do
+    it "responds to revenue_by_day"do
+      expect(Invoice).to respond_to(:revenue_by_day)
+    end
+  end
 end
