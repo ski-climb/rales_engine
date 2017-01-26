@@ -21,12 +21,12 @@ describe 'Items API' do
     get "/api/v1/items/#{item.id}/best_day"
     response_day = JSON.parse(response.body)
 
-    expect(response_day).to eq best_day
+    expect(response_day['best_day']).to eq best_day
   end
 
-  context 'when there is a tie' do
-    it 'returns most recent day' do
+  # context 'when there is a tie' do
+  #   it 'returns most recent day' do
 
-    end
-  end
+  #   end
+  # end
 end
