@@ -24,12 +24,6 @@ describe Invoice do
     end
   end
 
-  describe ".revenue_by_day" do
-    it "responds to revenue_by_day"do
-      expect(Invoice).to respond_to(:revenue_by_day)
-    end
-  end
-
   describe ".on_date" do
     context "given date" do
       it "returns only invoices on date" do
