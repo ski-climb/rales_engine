@@ -13,4 +13,10 @@ describe Merchant do
     it { is_expected.to have_many(:transactions) }
     it { is_expected.to have_many(:invoice_items) }
   end
+
+  describe '.most_items' do
+    it 'responds to most_items' do
+      expect(Merchant).to respond_to(:most_items)
+    end
+  end
 end
