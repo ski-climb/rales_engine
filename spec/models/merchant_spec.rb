@@ -14,7 +14,6 @@ describe Merchant do
     it { is_expected.to have_many(:invoice_items) }
   end
 
-
   describe '.most_items' do
     it 'responds to most_items' do
       expect(Merchant).to respond_to(:most_items)
@@ -25,5 +24,9 @@ describe Merchant do
     it "responds to revenue_by_day"do
       expect(Merchant).to respond_to(:revenue_by_day)
     end
+  end
+
+  describe "#customers_with_pending_invoices" do
+    it { is_expected.to respond_to(:customers_with_pending_invoices)}
   end
 end

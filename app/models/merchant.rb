@@ -40,3 +40,4 @@ class Merchant < ApplicationRecord
     Customer.where(id: customer_ids)
   end
 end
+
