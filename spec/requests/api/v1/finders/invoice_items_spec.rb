@@ -6,7 +6,7 @@ describe 'invoice_items API' do
 
   context 'find by' do
     let!(:invoice_item_1) { create(:invoice_item) }
-    let!(:invoice_item_2) { create(:invoice_item) }
+    let!(:invoice_item_2) { create(:invoice_item, quantity: 1_000_000) }
     let!(:invoice_item_3) { create(:invoice_item) }
 
     it 'id' do
@@ -43,25 +43,25 @@ describe 'invoice_items API' do
     end
 
     it 'unit_price' do
-      unit_price = invoice_item_2.unit_price
+      unit_price = invoice_item_2.unit_price_in_cents / 100.to_f
 
       get '/api/v1/invoice_items/find', params: {unit_price: unit_price}
       invoice_item = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(invoice_item['id']).to eq invoice_item_2.id
-      expect(invoice_item['unit_price']).to eq invoice_item_2.unit_price
+      expect(invoice_item['unit_price']).to eq (invoice_item_2.unit_price_in_cents / 100.to_f).to_s
     end
 
     it 'quantity' do
-      quantity = invoice_item_2.quantity
+      quantity = 1_000_000
 
       get '/api/v1/invoice_items/find', params: {quantity: quantity}
       invoice_item = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(invoice_item['id']).to eq invoice_item_2.id
-      expect(invoice_item['quantity']).to eq invoice_item_2.quantity
+      expect(invoice_item['quantity']).to eq 1_000_000
     end
 
     it 'created_at' do
@@ -105,7 +105,7 @@ describe 'invoice_items API' do
     let!(:item) { create(:item) }
     let!(:item_4) { create(:item, id: 4) }
 
-    let!(:invoice_item_1) { create(:invoice_item) }
+    let!(:invoice_item_1) { create(:invoice_item, quantity: 99) }
     let!(:invoice_item_2) { create(:invoice_item, quantity: 3, unit_price_in_cents: 12_34, invoice_id: 5) }
     let!(:invoice_item_3) { create(:invoice_item, quantity: 3, item_id: 4) }
     let!(:invoice_item_4) { create(:invoice_item, quantity: 2, invoice_id: 5, item_id: 4, unit_price_in_cents: 12_34, created_at: date, updated_at: date) }
