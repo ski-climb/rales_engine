@@ -33,6 +33,10 @@ describe Merchant do
     end
   end
 
+  describe "#customers_with_pending_invoices" do
+    it { is_expected.to respond_to(:customers_with_pending_invoices)}
+  end
+
   describe "#favorite_customer" do
     it { is_expected.to respond_to(:favorite_customer) }
   end

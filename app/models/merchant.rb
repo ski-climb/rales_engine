@@ -38,6 +38,17 @@ class Merchant < ApplicationRecord
     .sum('unit_price_in_cents * quantity')
   end
 
+  def customers_with_pending_invoices
+    customer_ids = Invoice
+      .joins(:transactions)
+      .group('invoices.id')
+      .having('sum(transactions.result) = 0')
+      .where(merchant_id: id)
+      .pluck(:customer_id)
+
+    Customer.where(id: customer_ids)
+  end
+
   def favorite_customer
     customers
       .joins(:invoices, :transactions)
@@ -47,3 +58,5 @@ class Merchant < ApplicationRecord
       .take
   end
 end
+
+

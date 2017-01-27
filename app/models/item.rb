@@ -35,4 +35,3 @@ class Item < ApplicationRecord
     .take(number_of_items.to_i)
   end
 end
-
