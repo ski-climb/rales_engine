@@ -5,6 +5,7 @@ class Merchant < ApplicationRecord
   has_many :invoices
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :invoices
+  has_many :customers, through: :invoices
   has_many :items
 
   def revenue(date)
@@ -13,7 +14,6 @@ class Merchant < ApplicationRecord
       .merge(InvoiceItem.successful)
       .sum('unit_price_in_cents * quantity')
   end
-
 
   def self.most_items(quantity)
     joins(:invoice_items)
@@ -30,4 +30,14 @@ class Merchant < ApplicationRecord
     .sum('unit_price_in_cents * quantity')
   end
 
+  def customers_with_pending_invoices
+    customer_ids = Invoice
+      .joins(:transactions)
+      .group('invoices.id')
+      .having('sum(transactions.result) = 0')
+      .where(merchant_id: id)
+      .pluck(:customer_id)
+
+    Customer.where(id: customer_ids)
+  end
 end
