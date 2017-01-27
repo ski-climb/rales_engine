@@ -33,12 +33,4 @@ describe Item do
   describe '.best_day' do
     it { is_expected.to respond_to(:best_day) }
   end
-
-  describe '#unit_price' do
-    it "returns the unit price in dollars" do
-      item = create(:item, unit_price_in_cents: 12_34)
-
-      expect(item.unit_price).to eq "12.34"
-    end
-  end
 end

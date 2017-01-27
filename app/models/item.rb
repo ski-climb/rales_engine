@@ -6,10 +6,6 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
-  def unit_price
-    (unit_price_in_cents / 100.to_f).to_s
-  end
-
   def self.most_items(quantity)
     joins(:invoice_items)
       .merge(InvoiceItem.successful)
