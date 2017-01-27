@@ -43,14 +43,14 @@ describe 'Items API' do
     end
 
     it 'unit_price' do
-      unit_price = item_2.unit_price
+      unit_price = item_2.unit_price_in_cents / 100.to_f
 
       get '/api/v1/items/find', params: {unit_price: unit_price}
       item = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(item['id']).to eq item_2.id
-      expect(item['unit_price']).to eq item_2.unit_price
+      expect(item['unit_price']).to eq (item_2.unit_price_in_cents / 100.to_f).to_s
     end
 
     it 'merchant_id' do
