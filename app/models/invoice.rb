@@ -17,4 +17,3 @@ class Invoice < ApplicationRecord
     end
   end
 end
-
