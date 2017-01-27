@@ -12,6 +12,7 @@ describe Merchant do
     it { is_expected.to have_many(:items) }
     it { is_expected.to have_many(:transactions) }
     it { is_expected.to have_many(:invoice_items) }
+    it { is_expected.to have_many(:customers).through(:invoices) }
   end
 
   describe '.most_revenue' do
@@ -30,5 +31,9 @@ describe Merchant do
     it "responds to revenue_by_day"do
       expect(Merchant).to respond_to(:revenue_by_day)
     end
+  end
+
+  describe "#favorite_customer" do
+    it { is_expected.to respond_to(:favorite_customer) }
   end
 end
