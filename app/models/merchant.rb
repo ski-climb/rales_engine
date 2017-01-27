@@ -39,12 +39,12 @@ class Merchant < ApplicationRecord
   end
 
   def customers_with_pending_invoices
-    customer_ids = Invoice
-      .joins(:transactions)
-      .group('invoices.id')
-      .having('sum(transactions.result) = 0')
-      .where(merchant_id: id)
-      .pluck(:customer_id)
+    customer_ids =
+      invoices
+        .joins(:transactions)
+        .group('invoices.id')
+        .having('sum(transactions.result) = 0')
+        .pluck(:customer_id)
 
     Customer.where(id: customer_ids)
   end
@@ -58,5 +58,3 @@ class Merchant < ApplicationRecord
       .take
   end
 end
-
-
