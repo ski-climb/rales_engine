@@ -1,8 +1,8 @@
-## Kyle and Nick's Rales Engine Project
+## Rales Engine Project
 
 ### Description
 
-Our [Rales Engine](http://backend.turing.io/module3/projects/rails_engine) project for Turing. In this project we import business data and host an API with endpoints to return records, relationships between models, and business intelligence as JSON. Checkout the schema file `schema.png` in the public directory to see all the models and their relationshps.
+Nick and Kyle's [Rales Engine](http://backend.turing.io/module3/projects/rails_engine) project for Turing. In this project we import business data and host an API with endpoints to return records, relationships between models, and business intelligence as JSON. Checkout the schema file `schema.png` in the public directory to see the models and their relationshps.
 
 Tech stack: Ruby, Rails, PostgreSQL, RSpec
 
