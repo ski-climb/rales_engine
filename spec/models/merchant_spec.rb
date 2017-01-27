@@ -7,11 +7,17 @@ describe Merchant do
     it { is_expected.to validate_presence_of(:created_at) }
   end
 
-  describe "relationships" do
+  describe 'relationships' do
     it { is_expected.to have_many(:invoices) }
     it { is_expected.to have_many(:items) }
     it { is_expected.to have_many(:transactions) }
     it { is_expected.to have_many(:invoice_items) }
+  end
+
+  describe '.most_revenue' do
+    it 'responds to most_revenue' do
+      expect(Merchant).to respond_to(:most_revenue)
+    end
   end
 
   describe '.most_items' do
