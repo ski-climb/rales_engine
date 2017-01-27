@@ -13,6 +13,7 @@ Rails.application.routes.draw do
           resources :invoices, only: [:index]
           resources :items, only: [:index]
           get "/revenue", to: "revenue#show"
+          get "/favorite_customer", to: "favorite_customer#show"
         end
       end
 

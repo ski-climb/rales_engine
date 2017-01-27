@@ -6,6 +6,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :invoices
   has_many :items
+  has_many :customers, through: :invoices
 
   def revenue(date)
     invoices.on_date(date)
@@ -13,7 +14,6 @@ class Merchant < ApplicationRecord
       .merge(InvoiceItem.successful)
       .sum('unit_price_in_cents * quantity')
   end
-
 
   def self.most_items(quantity)
     joins(:invoice_items)
@@ -30,4 +30,12 @@ class Merchant < ApplicationRecord
     .sum('unit_price_in_cents * quantity')
   end
 
+  def favorite_customer
+    customers
+      .joins(:invoices, :transactions)
+      .merge(Transaction.successful)
+      .group('customers.id')
+      .order('count(customers.id) DESC')
+      .take
+  end
 end
