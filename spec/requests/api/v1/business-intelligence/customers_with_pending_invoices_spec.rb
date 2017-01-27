@@ -21,7 +21,7 @@ describe 'Merchants API customers with pending invoices' do
 
       create(:transaction, invoice: invoice_4, result: 'success')
 
-      get "/api/v1/merchant/#{merchant.id}/customers_with_pending_invoices"
+      get "/api/v1/merchants/#{merchant.id}/customers_with_pending_invoices"
       customers = JSON.parse(response.body)
 
       expect(response).to be_success
