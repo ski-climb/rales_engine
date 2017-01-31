@@ -3,8 +3,6 @@ require './app/importers/invoices_importer'
 desc 'Drop and recreate database AND import all data from CSVs'
 namespace :import do
   task :all => :environment do
-    Rake::Task["db:drop"].invoke
-    Rake::Task["db:create"].invoke
     Rake::Task["db:schema:load"].invoke
     customers =     './db/csv/customers.csv'
     merchants =     './db/csv/merchants.csv'
