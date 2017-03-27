@@ -1,10 +1,12 @@
-## Rales Engine Project
+## Rales** Engine Project
 
 ### Description
 
 Nick and Kyle's [Rales Engine](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/rails_engine.md) project for Turing. In this project we import business data and host an API with endpoints to return records, relationships between models, and business intelligence as JSON. Checkout the schema file `schema.png` in the public directory to see the models and their relationshps.
 
 Tech stack: Ruby, Rails, PostgreSQL, RSpec
+
+** _(Um, I thought you were Ruby developers.  Don't you know how to spell 'Rails'?  Ah!  Good catch.  This project is a revamping of a previous project we competed called 'Sales Engine'.  Only this time we built it in Rails.  So it's a Rails Engine, I mean Rales Engine._
 
 ### Dependencies 
 
