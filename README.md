@@ -2,7 +2,7 @@
 
 ### Description
 
-Nick and Kyle's [Rales Engine](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/rails_engine.md) project for Turing. In this project we import business data and host an API with endpoints to return records, relationships between models, and business intelligence as JSON. Checkout the schema file `schema.png` in the public directory to see the models and their relationshps.
+Nick and Kyle's [Rales Engine](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/rails_engine.md) project for Turing. In this project we import business data and host an API with endpoints to return records, relationships between models, and business intelligence as JSON. Checkout the schema file `schema.png` in the public directory to see the models and their relationshps.  At its most basic, this is a couple days' worth of transaction data from a fake shop (items are purchased by customers from various merchants).
 
 Tech stack: Ruby, Rails, PostgreSQL, RSpec
 
