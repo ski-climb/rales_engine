@@ -8,7 +8,7 @@ end
 ruby '~> 2.3.0'
 gem 'rails', '~> 5.0.1'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 gem 'progressbar'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'simplecov', :require => false, :group => :test
